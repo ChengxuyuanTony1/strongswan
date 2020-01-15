@@ -27,7 +27,7 @@ build_botan()
 	git clone https://github.com/randombit/botan.git $BOTAN_DIR &&
 	cd $BOTAN_DIR &&
 	git checkout -qf $BOTAN_REV &&
-	python ./configure.py --amalgamation $BOTAN_CONFIG &&
+	python ./configure.py --cc $CC --amalgamation $BOTAN_CONFIG &&
 	make -j4 libs >/dev/null &&
 	sudo make install >/dev/null &&
 	sudo ldconfig || exit $?
@@ -155,7 +155,7 @@ all|coverage|sonarcloud)
 	fi
 	DEPS="$DEPS libcurl4-gnutls-dev libsoup2.4-dev libunbound-dev libldns-dev
 		  libmysqlclient-dev libsqlite3-dev clearsilver-dev libfcgi-dev
-		  libpcsclite-dev libpam0g-dev binutils-dev libunwind8-dev libnm-dev
+		  libpcsclite-dev libpam0g-dev binutils-dev libnm-dev
 		  libjson-c-dev iptables-dev python-pip libtspi-dev libsystemd-dev"
 	PYDEPS="tox"
 	if test "$1" = "deps"; then
